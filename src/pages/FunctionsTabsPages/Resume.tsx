@@ -25,6 +25,7 @@ import { pasteTextFromClipboard } from "../../utils/pasteTextFromClipboard";
 import FileCard from "../../components/FileCard";
 import { getTextSummary } from "../../services/getTextSummary";
 import { copyTextToClipboard } from "../../utils/copyTextToClipboard";
+import { getDocSummary } from "../../services/getDocSummary";
 
 const fileTypes = [
   "application/msword",
@@ -86,7 +87,6 @@ const Resume = () => {
 
   const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
-    console.log(selectedFile);
     if (selectedFile && fileTypes.includes(selectedFile.type)) {
       setFile(selectedFile);
     }
@@ -122,6 +122,31 @@ const Resume = () => {
       console.error(error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const summarizeDoc = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getDocSummary(
+        file as File,
+        textTone,
+        textLength.lenghtOptions[0],
+        summaryLanguage
+      );
+      setTextSummary(response);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSummarize = async () => {
+    if (file) {
+      summarizeDoc();
+    } else if (text) {
+      summarizeText();
     }
   };
 
@@ -252,7 +277,7 @@ const Resume = () => {
               <Button
                 appearance="primary"
                 disabled={(!text && !file) || isLoading}
-                onClick={summarizeText}
+                onClick={handleSummarize}
               >
                 Resumir
               </Button>
@@ -292,7 +317,7 @@ const Resume = () => {
           <Button
             appearance="primary"
             disabled={(!text && !file) || isLoading}
-            onClick={summarizeText}
+            onClick={handleSummarize}
           >
             Resumir
           </Button>

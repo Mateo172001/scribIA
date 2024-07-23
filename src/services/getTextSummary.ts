@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export const getTextSummary = async (text: string, tone: string, length: string, language:string) => {
-    let data = JSON.stringify({
-        "textLength": length,
-        "textTone": tone,
-        "text": text,
-        "language": language
-    });
+export const getTextSummary = async (text: string, tone: string, length: string, language: string) => {
+    let data = {
+        textLength: length,
+        textTone: tone,
+        text: text,
+        language: language
+    };
 
     let config = {
         method: 'post',

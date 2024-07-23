@@ -14,6 +14,7 @@ import {
   AccordionHeader,
   AccordionPanel,
   Dropdown,
+  Spinner,
 } from "@fluentui/react-components";
 import { useState, useRef } from "react";
 import { useTailwindBreakpoints } from "../../hooks/useTailwindBreakpoints";
@@ -190,7 +191,7 @@ const Resume = () => {
             </Button>
           </Field>
           {file && (
-            <FileCard className="mt-4 mb-4" file={file} onDelete={deleteFile} />
+            <FileCard className="mt-4 mb-4" file={file} onDelete={deleteFile} loading={isLoading}/>
           )}
 
           <Accordion collapsible>
@@ -278,6 +279,7 @@ const Resume = () => {
                 appearance="primary"
                 disabled={(!text && !file) || isLoading}
                 onClick={handleSummarize}
+                icon={isLoading ? <Spinner size="tiny"/> : null}
               >
                 Resumir
               </Button>
@@ -318,6 +320,7 @@ const Resume = () => {
             appearance="primary"
             disabled={(!text && !file) || isLoading}
             onClick={handleSummarize}
+            icon={isLoading ? <Spinner size="tiny"/> : null}
           >
             Resumir
           </Button>

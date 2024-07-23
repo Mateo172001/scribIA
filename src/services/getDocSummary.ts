@@ -2,6 +2,7 @@ import axios from "axios";
 import { convertToBase64 } from "../utils/convertFileToBase64";
 
 export const getDocSummary = async (doc: File, tone: string, length: string, language: string) => {
+    
     let fileData = await convertToBase64(doc);
     let data = {
         textLength: length,

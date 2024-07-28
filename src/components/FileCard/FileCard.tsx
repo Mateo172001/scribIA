@@ -2,9 +2,11 @@ import {
   Card,
   CardPreview,
   CardHeader,
+  CardFooter,
   Caption1,
   Button,
   Text,
+  ProgressBar,
 } from "@fluentui/react-components";
 import { BiMinusCircle } from "react-icons/bi";
 import { GrDocumentPdf, GrDocumentWord, GrDocumentText } from "react-icons/gr";
@@ -15,9 +17,15 @@ interface FileCardProps {
   file: File | null;
   onDelete?: () => void;
   className?: string;
+  loading?: boolean;
 }
 
-function FileCard({ onDelete, file, className }: FileCardProps) {
+function FileCard({
+  onDelete,
+  file,
+  className,
+  loading,
+}: FileCardProps) {
   const DocumentIcon = ({ ...props }) => {
     if (file?.type === "application/pdf") {
       return <GrDocumentPdf {...props} />;
@@ -39,10 +47,11 @@ function FileCard({ onDelete, file, className }: FileCardProps) {
     >
       <CardPreview>
         <div
-          className="min-w-16 min-h-16 content-center"
+          className="min-w-16 min-h-16 content-center relative"
           style={{ background: scribIA[90] }}
         >
           <DocumentIcon className="w-7 h-7 m-auto text-white" />
+          {loading && (<ProgressBar className="absolute bottom-0" thickness="large"/>)}
         </div>
       </CardPreview>
 

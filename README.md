@@ -1,30 +1,61 @@
-# React + TypeScript + Vite
+# Resumen IA App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta es una aplicación web que genera resúmenes de texto y documentos utilizando la API de Gemini. La aplicación permite a los usuarios ingresar texto o subir documentos, seleccionar la longitud, el tono y el idioma del resumen, y obtener un resumen generado por IA.
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Generación de resúmenes de texto y documentos.
+- Selección de longitud del resumen: corto, mediano, largo.
+- Selección de tono del resumen: profesional, informal, gracioso, optimista, informativo, explicativo.
+- Selección de idioma del resumen: español, inglés.
+- Interfaz de usuario intuitiva y fácil de usar.
 
-## Expanding the ESLint configuration
+## Tecnologías Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React
+- TypeScript
+- Axios
+- API de Gemini
 
-- Configure the top-level `parserOptions` property like this:
+## Instalación
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1. Clona el repositorio:
+    ```sh
+    git clone https://github.com/Mateo172001/scribIA.git
+    cd scribia
+    ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Instala las dependencias:
+    ```sh
+    npm install
+    ```
+
+3. Configura las variables de entorno:
+    Crea un archivo `.env` en la raíz del proyecto y agrega la URL de la API de Gemini:
+    ```env
+    VITE_SUMMARIZE_TEXT_CLOUD_FUNCTION_URL=https://api.gemini.com/summarize-text
+    VITE_SUMMARIZE_DOC_CLOUD_FUNCTION_URL=https://api.gemini.com/summarize-doc
+    ```
+
+4. Inicia la aplicación:
+    ```sh
+    npm start
+    ```
+
+## Uso
+
+1. Ingresa el texto que deseas resumir o sube un documento.
+2. Selecciona las opciones de longitud, tono e idioma del resumen.
+3. Haz clic en el botón "Resumir" para generar el resumen.
+4. El resumen generado se mostrará en el área de texto correspondiente.
+
+## Estructura del Proyecto
+
+- `src/pages/FunctionsTabsPages/Resume.tsx`: Componente principal de la página de resumen.
+- `src/services/getTextSummary.ts`: Servicio para obtener resúmenes de texto utilizando la API de Gemini.
+- `src/services/getDocSummary.ts`: Servicio para obtener resúmenes de documentos utilizando la API de Gemini.
+- `src/utils/convertFileToBase64.ts`: Utilidad para convertir archivos a base64.
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Por favor, abre un issue o un pull request para discutir cualquier cambio que desees realizar.

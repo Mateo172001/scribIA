@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Tab,
   TabList,
@@ -20,6 +20,12 @@ const Home: React.FC = () => {
   ) => {
     navigate(`/${data.value}`);
   };
+
+  useEffect(() => {
+    if (!location.pathname.substring(1)) {
+      navigate("/resume");
+    }
+  }, [location.pathname, navigate]);
 
   return (
     <>

@@ -14,6 +14,7 @@ import {
   AccordionHeader,
   AccordionPanel,
   Dropdown,
+  Spinner,
 } from "@fluentui/react-components";
 import { useState, useRef } from "react";
 import { useTailwindBreakpoints } from "../../hooks/useTailwindBreakpoints";
@@ -25,6 +26,7 @@ import { pasteTextFromClipboard } from "../../utils/pasteTextFromClipboard";
 import FileCard from "../../components/FileCard";
 import { getTextSummary } from "../../services/getTextSummary";
 import { copyTextToClipboard } from "../../utils/copyTextToClipboard";
+import { getDocSummary } from "../../services/getDocSummary";
 
 const fileTypes = [
   "application/msword",
@@ -86,7 +88,6 @@ const Resume = () => {
 
   const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
-    console.log(selectedFile);
     if (selectedFile && fileTypes.includes(selectedFile.type)) {
       setFile(selectedFile);
     }
@@ -122,6 +123,31 @@ const Resume = () => {
       console.error(error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const summarizeDoc = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getDocSummary(
+        file as File,
+        textTone,
+        textLength.lenghtOptions[0],
+        summaryLanguage
+      );
+      setTextSummary(response);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSummarize = async () => {
+    if (file) {
+      summarizeDoc();
+    } else if (text) {
+      summarizeText();
     }
   };
 
@@ -165,7 +191,12 @@ const Resume = () => {
             </Button>
           </Field>
           {file && (
-            <FileCard className="mt-4 mb-4" file={file} onDelete={deleteFile} />
+            <FileCard
+              className="mt-4 mb-4"
+              file={file}
+              onDelete={deleteFile}
+              loading={isLoading}
+            />
           )}
 
           <Accordion collapsible>
@@ -252,7 +283,8 @@ const Resume = () => {
               <Button
                 appearance="primary"
                 disabled={(!text && !file) || isLoading}
-                onClick={summarizeText}
+                onClick={handleSummarize}
+                icon={isLoading ? <Spinner size="tiny" /> : null}
               >
                 Resumir
               </Button>
@@ -292,12 +324,27 @@ const Resume = () => {
           <Button
             appearance="primary"
             disabled={(!text && !file) || isLoading}
-            onClick={summarizeText}
+            onClick={handleSummarize}
+            icon={isLoading ? <Spinner size="tiny" /> : null}
           >
             Resumir
           </Button>
         </div>
       )}
+
+      <div className="mt-4 text-center mt-16">
+        <p>
+          Hecho con ❤️ por{" "}
+          <a
+            className="text-blue-600"
+            href="https://github.com/Mateo172001/scribIA.git"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Mateo172001
+          </a>
+        </p>
+      </div>
     </div>
   );
 };

@@ -191,7 +191,12 @@ const Resume = () => {
             </Button>
           </Field>
           {file && (
-            <FileCard className="mt-4 mb-4" file={file} onDelete={deleteFile} loading={isLoading}/>
+            <FileCard
+              className="mt-4 mb-4"
+              file={file}
+              onDelete={deleteFile}
+              loading={isLoading}
+            />
           )}
 
           <Accordion collapsible>
@@ -279,7 +284,7 @@ const Resume = () => {
                 appearance="primary"
                 disabled={(!text && !file) || isLoading}
                 onClick={handleSummarize}
-                icon={isLoading ? <Spinner size="tiny"/> : null}
+                icon={isLoading ? <Spinner size="tiny" /> : null}
               >
                 Resumir
               </Button>
@@ -320,12 +325,26 @@ const Resume = () => {
             appearance="primary"
             disabled={(!text && !file) || isLoading}
             onClick={handleSummarize}
-            icon={isLoading ? <Spinner size="tiny"/> : null}
+            icon={isLoading ? <Spinner size="tiny" /> : null}
           >
             Resumir
           </Button>
         </div>
       )}
+
+      <div className="mt-4 text-center mt-16">
+        <p>
+          Hecho con ❤️ por{" "}
+          <a
+            className="text-blue-600"
+            href="https://github.com/Mateo172001/scribIA.git"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Mateo172001
+          </a>
+        </p>
+      </div>
     </div>
   );
 };

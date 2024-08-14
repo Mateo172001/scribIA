@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   const location = useLocation();
 
   const handleTabSelect: SelectTabEventHandler = (
-    event: SelectTabEvent,
+    _event: SelectTabEvent,
     data: SelectTabData
   ) => {
     navigate(`/${data.value}`);

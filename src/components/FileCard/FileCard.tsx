@@ -2,7 +2,6 @@ import {
   Card,
   CardPreview,
   CardHeader,
-  CardFooter,
   Caption1,
   Button,
   Text,
@@ -20,12 +19,7 @@ interface FileCardProps {
   loading?: boolean;
 }
 
-function FileCard({
-  onDelete,
-  file,
-  className,
-  loading,
-}: FileCardProps) {
+function FileCard({ onDelete, file, className, loading }: FileCardProps) {
   const DocumentIcon = ({ ...props }) => {
     if (file?.type === "application/pdf") {
       return <GrDocumentPdf {...props} />;
@@ -51,7 +45,9 @@ function FileCard({
           style={{ background: scribIA[90] }}
         >
           <DocumentIcon className="w-7 h-7 m-auto text-white" />
-          {loading && (<ProgressBar className="absolute bottom-0" thickness="large"/>)}
+          {loading && (
+            <ProgressBar className="absolute bottom-0" thickness="large" />
+          )}
         </div>
       </CardPreview>
 

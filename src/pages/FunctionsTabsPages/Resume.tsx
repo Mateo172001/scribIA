@@ -55,7 +55,7 @@ const Resume = () => {
   const { isMobile } = useTailwindBreakpoints();
 
   const onLenghtChange: ToolbarProps["onCheckedValueChange"] = (
-    e,
+    _e,
     { name, checkedItems }
   ) => {
     setTextLength((s) => ({ ...s, [name]: checkedItems }));
@@ -65,13 +65,13 @@ const Resume = () => {
     setTextTone(ev.target.value);
   };
 
-  const onToneOptionSelect: ComboboxProps["onOptionSelect"] = (e, value) => {
+  const onToneOptionSelect: ComboboxProps["onOptionSelect"] = (_e, value) => {
     setSelectedToneOptions(value.selectedOptions);
     setTextTone(value.optionText ?? "");
   };
 
   const onLanguageOptionSelect: ComboboxProps["onOptionSelect"] = (
-    e,
+    _e,
     value
   ) => {
     setSummaryLanguageOptions(value.selectedOptions);
